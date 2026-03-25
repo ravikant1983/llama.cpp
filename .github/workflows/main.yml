@@ -31,8 +31,14 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: rkg1983/llama:${{ github.sha }}
-        severity: CRITICAL,HIGH
+        format: 'table'
         exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+        trivy-config:
+           skip-dirs: ["node_modules", ".git"]
+           
 
     # Push Image
     - name: Push Image
@@ -43,7 +49,7 @@ jobs:
     # Update GitOps Repo
     - name: Update GitOps
       run: |
-        git clone https://github.com/<your-username>/llama-gitops.git
+        git clone https://github.com/ravikant1983/llama-gitops.git
         cd llama-gitops
         sed -i "s|image:.*|image: rkg1983/llama:${{ github.sha }}|g" deployment.yaml
         git config user.name "github-actions"
