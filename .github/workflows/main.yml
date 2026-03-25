@@ -37,8 +37,10 @@ jobs:
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'HIGH'
-        trivy-config:
-           skip-dirs: ["node_modules", ".git"]
+        trivy-config: |
+           skip-dirs:
+            - node_modules
+            - .git
            
 
     # Push Image
