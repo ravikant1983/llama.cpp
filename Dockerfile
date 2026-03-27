@@ -39,7 +39,7 @@ COPY --from=builder /app/llama.cpp/build /app/llama.cpp/build
 RUN mkdir -p /app/llama.cpp/models && \
     wget --quiet --show-progress --content-disposition \
     "https://huggingface.co" \
-    -o /app/llama.cpp/models/tinyllama.gguf
+    -O /app/llama.cpp/models/tinyllama.gguf
 
 
 COPY start.sh /app/start.sh
