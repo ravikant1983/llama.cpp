@@ -37,7 +37,8 @@ COPY --from=builder /app/llama.cpp/build /app/llama.cpp/build
 
 
 RUN mkdir -p /app/llama.cpp/models && \
-    wget https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf \
+    wget --quiet --show-progress --content-disposition \
+    "https://huggingface.co" \
     -o /app/llama.cpp/models/tinyllama.gguf
 
 
