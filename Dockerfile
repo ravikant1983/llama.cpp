@@ -28,7 +28,7 @@ WORKDIR /app
 # Only runtime deps (very minimal)
 RUN apt-get update && apt-get install -y \
     libgomp1 \
-    curl \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy compiled binaries only (small + fast)
@@ -37,7 +37,7 @@ COPY --from=builder /app/llama.cpp/build /app/llama.cpp/build
 
 
 RUN mkdir -p /app/llama.cpp/models && \
-    curl -L https://huggingface.co \
+    wget https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf \
     -o /app/llama.cpp/models/tinyllama.gguf
 
 
