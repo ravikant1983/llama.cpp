@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Cleanup legacy root files
+      run: sudo rm -rf ${{ github.workspace }}/.scannerwork
+      
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # SonarQube Scan
     - name: SonarQube Scan
@@ -50,13 +53,9 @@ jobs:
         docker push rkg1983/llama:${{ github.sha }}
 
     # Update GitOps Repo
-    - name: Checkout Code
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.TOKEN_GITHUB }}
     - name: Update GitOps
       run: |
-        git clone https://github.com/ravikant1983/llama-gitops.git
+        git clone https://x-access-token:${{ secrets.TOKEN_GITHUB }}@github.com/ravikant1983/llama-gitops.git
         cd llama-gitops
         sed -i "s|image:.*|image: rkg1983/llama:${{ github.sha }}|g" deployment.yaml
         git config user.name "github-actions"
