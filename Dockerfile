@@ -28,11 +28,18 @@ WORKDIR /app
 # Only runtime deps (very minimal)
 RUN apt-get update && apt-get install -y \
     libgomp1 \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy compiled binaries only (small + fast)
 COPY --from=builder /app/llama.cpp/build /app/llama.cpp/build
-COPY llama.cpp/models /app/llama.cpp/models
+#COPY llama.cpp/models /app/llama.cpp/models
+
+
+RUN mkdir -p /app/llama.cpp/models && \
+    curl -L https://huggingface.co \
+    -o /app/llama.cpp/models/tinyllama.gguf
+
 
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
