@@ -18,7 +18,7 @@ COPY --from=builder /app/llama.cpp/build /app/llama.cpp/build
 
 # FIXED: Correct URL for GitHub Action to download the 638MB model
 RUN mkdir -p /app/llama.cpp/models 
-COPY llama.cpp/models/tinyllama.gguf /app/llama.cpp/models/tinyllama.gguf
+COPY ./llama.cpp/models/tinyllama.gguf /app/llama.cpp/models/
 
 
 COPY start.sh /app/start.sh
