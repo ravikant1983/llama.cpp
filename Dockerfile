@@ -17,9 +17,9 @@ RUN apt-get update && apt-get install -y libgomp1 curl && rm -rf /var/lib/apt/li
 COPY --from=builder /app/llama.cpp/build /app/llama.cpp/build
 
 # FIXED: Correct URL for GitHub Action to download the 638MB model
-RUN mkdir -p /app/llama.cpp/models && \
-    curl -L "https://huggingface.co" \
-    -o /app/llama.cpp/models/tinyllama.gguf
+RUN mkdir -p /app/llama.cpp/models 
+COPY llama.cpp/models/tinyllama.gguf /app/llama.cpp/models/tinyllama.gguf
+
 
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
