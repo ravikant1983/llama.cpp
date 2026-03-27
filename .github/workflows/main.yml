@@ -26,6 +26,12 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        
+    - name: Inject Model File
+      run: |
+        mkdir -p llama.cpp/models/
+        cp /home/ec2-user/llama.cpp/llama.cpp/models/tinyllama.gguf ./llama.cpp/models/tinyllama.gguf
+
 
     # Build Docker Image
     - name: Build Image
