@@ -30,7 +30,7 @@ jobs:
     - name: Inject Model File
       run: |
         mkdir -p llama.cpp/models/
-        cp /home/ec2-user/llama.cpp/llama.cpp/models/tinyllama.gguf ./llama.cpp/models/tinyllama.gguf
+        cp /home/ec2-user/llama.cpp/llama.cpp/models/Llama-3.2-3B-Instruct-Q4_K_M.gguf ./llama.cpp/models/Llama-3.2-3B-Instruct-Q4_K_M.gguf
 
 
     # Build Docker Image
