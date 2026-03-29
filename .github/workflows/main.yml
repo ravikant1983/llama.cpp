@@ -27,10 +27,6 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         
-    - name: Inject Model File
-      run: |
-        mkdir -p llama.cpp/models/
-        cp /home/ec2-user/llama.cpp/llama.cpp/models/ChatWithRavikant.gguf ./llama.cpp/models/ChatWithRavikant.gguf
 
 
     # Build Docker Image
